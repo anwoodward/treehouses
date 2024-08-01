@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bauhaus Inspired Treehouse Animation</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        canvas {
+            border: 1px solid #000000; /* Black border */
+            background: #ffffff; /* White canvas background */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let angle = 0;
+
+        function drawScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the background
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the tree with modernist style
+            drawTree(400, 300);
+
+            // Draw the treehouse
+            drawTreehouse(400, 200);
+
+            // Increment the angle for animation
+            angle += 0.01;
+
+            // Request the next frame
+            requestAnimationFrame(drawScene);
+        }
+
+        function drawTree(x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(Math.sin(angle) * 0.05);
+
+            // Trunk
+            ctx.fillStyle = '#000000'; // Black for trunk
+            ctx.fillRect(-10, 0, 20, 200);
+
+            // Branches (simple geometric lines)
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(-100, -100);
+            ctx.moveTo(0, 0);
+            ctx.lineTo(100, -100);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function drawTreehouse(x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+
+            // House body (geometric shapes)
+            ctx.fillStyle = '#ff0000'; // Red for house
+            ctx.fillRect(-40, -50, 80, 80);
+
+            // Roof (triangle)
+            ctx.beginPath();
+            ctx.moveTo(-50, -50);
+            ctx.lineTo(0, -100);
+            ctx.lineTo(50, -50);
+            ctx.closePath();
+            ctx.fillStyle = '#0000ff'; // Blue for roof
+            ctx.fill();
+
+            // Windows (circles)
+            ctx.fillStyle = '#ffffff'; // White for windows
+            ctx.beginPath();
+            ctx.arc(-20, -30, 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(20, -30, 10, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        drawScene();
+    </script>
+</body>
+</html>
